@@ -10,9 +10,11 @@ const CardsSectionStyled = styled.section`
   justify-content: center;
   align-items: center;
   gap: 100px;
+  padding: 80px 0px;
 
   @media (max-width: 968px) {
     gap: 80px;
+    padding: 60px 0px;
   }
 `;
 

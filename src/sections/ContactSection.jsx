@@ -9,6 +9,7 @@ const ContactSectionStyled = styled.section`
   grid-template-columns: auto auto;
   align-items: center;
   gap: 70px;
+  padding: 80px 0px;
 
   img {
     width: 100%;
@@ -28,7 +29,7 @@ const ContactSectionStyled = styled.section`
     justify-content: center;
     align-items: center;
     gap: 0px;
-    padding: 0px 12px;
+    padding: 60px 12px;
   }
 `;
 

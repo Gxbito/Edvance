@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "./Button";
 import { IoMenuSharp } from "react-icons/io5";
+import Menu from "./Menu";
 
 const NavbarStyled = styled.nav`
   width: 100%;
@@ -10,7 +11,7 @@ const NavbarStyled = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 32px 0px;
+  padding-top: 12px;
 
   img {
     width: 230px;
@@ -67,6 +68,8 @@ const NavbarStyled = styled.nav`
 `;
 
 function Navbar() {
+  const [isVisible, setIsVisible] = useState(false);
+
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
@@ -74,35 +77,42 @@ function Navbar() {
     }
   };
 
+  const handleVisible = () => {
+    setIsVisible((prev) => !prev);
+  };
+
   return (
-    <NavbarStyled>
-      <img src="src/assets/images/Logo_color 1.svg" alt="edvance" />
-      <div>
-        <ul>
-          <li>
-            <a href="#" onClick={() => scrollToSection("CardsSection")}>
-              ¿Quiénes somos?
-            </a>
-          </li>
-          <li>
-            <a href="#" onClick={() => scrollToSection("ServicesSection")}>
-              Servicios
-            </a>
-          </li>
-          <li>
-            <a href="#" onClick={() => scrollToSection("ContactSection")}>
-              Contacto
-            </a>
-          </li>
-        </ul>
-        <Button variant="primary" size="normal">
-          INGRESO A CURSOS
+    <>
+      <NavbarStyled>
+        <img src="src/assets/images/Logo_color 1.svg" alt="edvance" />
+        <div>
+          <ul>
+            <li>
+              <a href="#" onClick={() => scrollToSection("CardsSection")}>
+                ¿Quiénes somos?
+              </a>
+            </li>
+            <li>
+              <a href="#" onClick={() => scrollToSection("ServicesSection")}>
+                Servicios
+              </a>
+            </li>
+            <li>
+              <a href="#" onClick={() => scrollToSection("ContactSection")}>
+                Contacto
+              </a>
+            </li>
+          </ul>
+          <Button variant="primary" size="normal">
+            INGRESO A CURSOS
+          </Button>
+        </div>
+        <Button variant="primary" size="small" onClick={handleVisible}>
+          <IoMenuSharp />
         </Button>
-      </div>
-      <Button variant="primary" size="small">
-        <IoMenuSharp />
-      </Button>
-    </NavbarStyled>
+      </NavbarStyled>
+      <Menu isVisible={isVisible} />
+    </>
   );
 }
 

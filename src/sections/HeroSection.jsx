@@ -14,9 +14,10 @@ const HeroSectionStyled = styled.section`
   justify-content: center;
   align-items: center;
   position: relative;
+  padding: 80px 0px;
 
   @media (max-width: 968px) {
-    margin-top: 60px;
+    padding: 60px 0px;
   }
 `;
 
@@ -161,7 +162,7 @@ const ButtonContainer = styled.div`
 
 const WhiteShadow = styled.div`
   width: 100%;
-  height: 170px;
+  height: 300px;
   z-index: 2;
   position: absolute;
   left: 0;
@@ -244,6 +245,13 @@ function ImageSlider({ direction }) {
 }
 
 function HeroSection() {
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <HeroSectionStyled>
@@ -268,11 +276,12 @@ function HeroSection() {
               </Swiper>
             </HeroTextContainer>
             <ButtonContainer>
-              <Button variant="primary" size="normal">
+              <Button variant="primary" size="normal" onClick={() => scrollToSection("CardsSection")}>
                 Saber más
               </Button>
-              <Button variant="secondary" size="normal">
-                Contactar <MdOutlineMailOutline />
+              <Button variant="secondary" size="normal" onClick={() => scrollToSection("ContactSection")}>
+                Contactar
+                <MdOutlineMailOutline />
               </Button>
             </ButtonContainer>
           </div>

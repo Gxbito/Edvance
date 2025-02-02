@@ -27,13 +27,11 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 120px;
   margin-bottom: 120px;
 }
 
 @media (max-width: 968px) {
   main {
-    gap: 90px;
     margin-bottom: 80px;
   }
 }
