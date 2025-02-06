@@ -37,9 +37,9 @@ const ButtonStyled = styled.button`
   }
 `;
 
-function Button({ children, onClick, variant, size }) {
+function Button({ children, onClick, variant, size, type }) {
   return (
-    <ButtonStyled variant={variant} onClick={onClick} size={size}>
+    <ButtonStyled variant={variant} onClick={onClick} size={size} type={type}>
       {children}
     </ButtonStyled>
   );

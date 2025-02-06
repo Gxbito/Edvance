@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "./Button";
 import Input from "./Input";
+import TextArea from "./TextArea";
 
 const FormContainer = styled.form`
   width: 100%;
-  max-height: 545px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   gap: 40px;
-  padding: 72px 48px;
+  padding: 48px;
   background-color: #ffffff;
   border-radius: 18px;
   box-shadow: var(--shadow);
@@ -61,8 +61,43 @@ const FormContainer = styled.form`
 `;
 
 function Form() {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    comment: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(
+        "http://edvance.cl:8060/api/contact/submit",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error al enviar el formulario");
+      }
+
+      setFormData({ name: "", phone: "", email: "", comment: "" });
+    } catch (error) {
+    } 
+  };
+
   return (
-    <FormContainer>
+    <FormContainer onSubmit={handleSubmit}>
       <div>
         <h3>Contáctanos</h3>
         <p>
@@ -71,11 +106,37 @@ function Form() {
         </p>
       </div>
       <div>
-        <Input placeholder="Nombre" type="text"/>
-        <Input placeholder="Email" type="email"/>
-        <Input placeholder="Contraseña" type="password"/>
+        <Input
+          placeholder="Nombre"
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+        <Input
+          placeholder="Teléfono"
+          type="text"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+        />
+        <Input
+          placeholder="Email"
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        <TextArea
+          placeholder="Comentario"
+          name="comment"
+          value={formData.comment}
+          onChange={handleChange}
+        />
       </div>
-      <Button variant="primary" size="normal">Contact</Button>
+      <Button variant="primary" size="normal" type="submit">
+        Enviar
+      </Button>
     </FormContainer>
   );
 }
